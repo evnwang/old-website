@@ -1,0 +1,99 @@
+body, html{
+	height: 100%;
+	margin: 0;
+}
+.center{
+	margin-left:auto;
+	margin-right:auto;
+	display:inline-block;
+	width:40px;
+	height:40px;
+}
+.container{
+	position: absolute;
+	left: 0;
+	top: 35%;
+	width: 100%;
+	text-align: center;
+}
+.img1, .img2, .img3, .divider {
+	position: relative;
+	background-attachment: fixed;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.img1 {
+	background-image: url("images/nyc_skyline.jpg");	
+	height: 100%;
+}
+.img2 {
+	background-image: url("images/mountain_landscape.jpg");	
+	min-height: 500px;
+}
+.img3 {
+	background-image:url("images/shanghai_skyline.jpg");
+	min-height: 600px;
+}
+.title1, .title2{
+	font-family: Georgia, Times, serif;
+	text-align:center;
+	background-color:black;
+	color:white;
+	width:800px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.caption1{
+	position: absolute;
+	left: 0;
+	top: 20%;
+	width: 100%;
+	text-align: center;
+}
+.caption2{
+	position: absolute;
+	left: 0;
+	top: 40%;
+	width: 100%;
+	text-align: center;
+}
+.caption3{
+	position: absolute;
+	left: 0;
+	top: 10%;
+	width: 100%;
+	text-align: center;
+}
+.caption1 span.border {
+	background-color: #111;
+	color: #fff;
+	padding: 18px;
+	font-size: 30px;
+	letter-spacing: 10px;		
+	font-family: Georgia, Times, serif;
+
+}
+.caption2 span.border, .caption3 span.border{
+	font-size: 25px;
+	background-color: #111;
+	color: #fff;
+	padding: 18px;
+	letter-spacing: 10px;
+	font-family: Georgia, Times, serif;
+}
+.title{
+	position: absolute;
+	left: 0;
+	top: 15%;
+	width: 100%;
+	text-align: center;
+}
+.title span.border{
+	font-size: 25px;
+	background-color: #111;
+	color: #fff;
+	padding: 18px;
+	letter-spacing: 1px;
+	font-family: Georgia, Times, serif;
+}
