@@ -9,14 +9,14 @@ body, html{
 	width:40px;
 	height:40px;
 }
-.container{
+.link-container{
 	position: absolute;
 	left: 0;
-	top: 35%;
+	top: 20%;
 	width: 100%;
 	text-align: center;
 }
-.img1, .img2, .img3, .divider {
+.img1, .img2, .img3 {
 	position: relative;
 	background-attachment: fixed;
 	background-position: center;
@@ -26,16 +26,19 @@ body, html{
 .img1 {
 	background-image: url("images/nyc_skyline.jpg");	
 	height: 100%;
+	opacity: 0.9;
 }
 .img2 {
 	background-image: url("images/mountain_landscape.jpg");	
 	min-height: 500px;
+	opacity: 0.9;
 }
 .img3 {
 	background-image:url("images/shanghai_skyline.jpg");
 	min-height: 600px;
+	opacity: 0.9;
 }
-.title1, .title2{
+/*.title1, .title2{
 	font-family: Georgia, Times, serif;
 	text-align:center;
 	background-color:black;
@@ -43,57 +46,103 @@ body, html{
 	width:800px;
 	margin-left: auto;
 	margin-right: auto;
-}
-.caption1{
+}*/
+.header1{
 	position: absolute;
 	left: 0;
 	top: 20%;
 	width: 100%;
 	text-align: center;
 }
-.caption2{
+.header2{
 	position: absolute;
 	left: 0;
 	top: 40%;
 	width: 100%;
 	text-align: center;
 }
-.caption3{
+.header3{
 	position: absolute;
 	left: 0;
 	top: 10%;
 	width: 100%;
 	text-align: center;
 }
-.caption1 span.border {
+.header4{
+	position: absolute;
+	left: 0;
+	top: 10%;
+	width: 100%;
+	text-align: center;
+}
+.header1 span.border{
+	font-size: 30px;
 	background-color: #111;
 	color: #fff;
 	padding: 18px;
-	font-size: 30px;
-	letter-spacing: 10px;		
+	letter-spacing: 3px;
 	font-family: Georgia, Times, serif;
-
-}
-.caption2 span.border, .caption3 span.border{
+} 
+.header2 span.border, .header3 span.border{
 	font-size: 25px;
 	background-color: #111;
 	color: #fff;
 	padding: 18px;
-	letter-spacing: 10px;
+	letter-spacing: 5px;
 	font-family: Georgia, Times, serif;
 }
-.title{
-	position: absolute;
-	left: 0;
-	top: 15%;
-	width: 100%;
-	text-align: center;
-}
-.title span.border{
+.header4 span.border{
 	font-size: 25px;
 	background-color: #111;
 	color: #fff;
 	padding: 18px;
 	letter-spacing: 1px;
+	font-family: Georgia, Times, serif;
+}
+.about{
+	position: absolute;
+	top: 25%;
+	text-align: justify;
+	left: 50px;
+	right: 50px;
+}
+.about div.border{
+	font-size: 14px;
+	background-color: #111;
+	color: #fff;
+	padding: 18px;
+	font-family: Georgia, Times, serif;
+	border-style: solid;
+  	border-color: white;
+}
+.email{
+	position: absolute;
+	left: 0;
+	top: 40%;
+	width: 100%;
+	text-align: center;
+}
+.email span.border{
+	font-size: 15px;
+	background-color: #111;
+	color: #fff;
+	padding: 18px;
+	letter-spacing: 1px;
+	font-family: Georgia, Times, serif;
+}
+ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+li {
+	float: left;
+}
+li a{
+	display: block;
+	background-color:#a3cff2;
+	color:black;
+	padding:5px;
 	font-family: Georgia, Times, serif;
 }
