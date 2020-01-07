@@ -1,6 +1,23 @@
 body, html{
 	height: 100%;
 	margin: 0;
+	font-family: Georgia, Times, serif;
+}
+ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+li {
+	float: left;
+}
+li a{
+	display: block;
+	background-color:#a3cff2;
+	color:black;
+	padding:5px;
+	font-family: Georgia, Times, serif;
 }
 .center{
 	margin-left:auto;
@@ -130,19 +147,28 @@ body, html{
 	letter-spacing: 1px;
 	font-family: Georgia, Times, serif;
 }
-ul {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	overflow: hidden;
+
+select{
+	width: 60px;
 }
-li {
-	float: left;
+.proj{
+	position: absolute;
+	color: white;
+	background-color: #4CAF50;
+	left: 20px;
+	text-decoration: none;
+	padding: 10px;
 }
-li a{
-	display: block;
-	background-color:#a3cff2;
-	color:black;
-	padding:5px;
+body#calculator{
+	background-color: #fff0b3;
 	font-family: Georgia, Times, serif;
+	padding-left: 10px;
+}
+button{
+	font-family: Georgia, Times, serif;
+	padding: 5px;
+	background-color:black;
+	color:white;
+	border-style: none;
+	letter-spacing: 1px;
 }
