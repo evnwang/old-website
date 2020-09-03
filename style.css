@@ -3,22 +3,6 @@ body, html{
 	margin: 0;
 	font-family: Georgia, Times, serif;
 }
-ul {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	overflow: hidden;
-}
-li {
-	float: left;
-}
-li a{
-	display: block;
-	background-color:#a3cff2;
-	color:black;
-	padding:5px;
-	font-family: Georgia, Times, serif;
-}
 .center{
 	margin-left:auto;
 	margin-right:auto;
@@ -55,15 +39,6 @@ li a{
 	min-height: 600px;
 	opacity: 0.9;
 }
-/*.title1, .title2{
-	font-family: Georgia, Times, serif;
-	text-align:center;
-	background-color:black;
-	color:white;
-	width:800px;
-	margin-left: auto;
-	margin-right: auto;
-}*/
 .header1{
 	position: absolute;
 	left: 0;
@@ -100,15 +75,7 @@ li a{
 	letter-spacing: 3px;
 	font-family: Georgia, Times, serif;
 } 
-.header2 span.border, .header3 span.border{
-	font-size: 25px;
-	background-color: #111;
-	color: #fff;
-	padding: 18px;
-	letter-spacing: 5px;
-	font-family: Georgia, Times, serif;
-}
-.header4 span.border{
+.header2 span.border, .header3 span.border, .header4 span.border{
 	font-size: 25px;
 	background-color: #111;
 	color: #fff;
@@ -151,13 +118,18 @@ li a{
 select{
 	width: 60px;
 }
-.proj{
+.proj,.proj:link,.proj:visited{
 	position: absolute;
 	color: white;
-	background-color: #4CAF50;
+	background-color: #111;
 	left: 20px;
 	text-decoration: none;
 	padding: 10px;
+	border:none;
+	outline:none;
+}
+.proj:hover{
+	color: #f5993d;
 }
 body#calculator{
 	background-color: #fff0b3;
@@ -171,4 +143,7 @@ button{
 	color:white;
 	border-style: none;
 	letter-spacing: 1px;
+}
+button:hover{
+	opacity: 0.6;
 }
