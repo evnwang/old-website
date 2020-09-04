@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<head>
+	<title>Linear Programming Solver</title>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<style>
+		body{
+			background-color:#3AF3F3;
+		}
+	</style>
+	<script>
+		var table=[];
+		function generate(){
+			if(document.getElementById('ID').firstChild){
+				while (document.getElementById('ID').hasChildNodes()) {
+					document.getElementById('ID').removeChild(document.getElementById('ID').lastChild);
+				}
+				while (document.getElementById('eq').hasChildNodes()) {
+					document.getElementById('eq').removeChild(document.getElementById('eq').lastChild);
+				}
+				table=[];
+			}
+			var i,j=0;
+			var vnum=0;
+			var type=document.createElement("select");
+			document.getElementById('eq').appendChild(type);
+			type.setAttribute("id","probtype");
+			var maximize=document.createElement("option")
+			maximize.text="maximize";
+			type.add(maximize);
+			var minimize=document.createElement("option")
+			minimize.text="minimize";
+			type.add(maximize);
+			var beg=document.createElement("span");
+			document.getElementById('eq').appendChild(beg);
+			beg.setAttribute("id","b");
+			document.getElementById(beg.id).innerHTML="z=";
+			for(j=0;j<document.getElementById('var').value;j++){<!--objective function-->
+				var eq1 = document.createElement("input");
+				document.getElementById('eq').appendChild(eq1);
+				eq1.setAttribute("id", "ObjTask " + document.getElementById('eq').childElementCount);
+				var eq2=document.createElement("span");
+				document.getElementById('eq').appendChild(eq2);
+				eq2.setAttribute("id", "Objstr"+document.getElementById('eq').childElementCount);
+				if(j==document.getElementById('var').value-1){
+					document.getElementById(eq2.id).innerHTML="x"+(j+1);
+				}else{		
+					document.getElementById(eq2.id).innerHTML="x"+(j+1)+"+";
+				}
+			}
+			for(i=0;i<document.getElementById('cons').value;i++){<!--output table-->
+				table[i]=[];
+				for(j=0;j<document.getElementById('var').value;j++){
+					var add1 = document.createElement("input");
+					document.getElementById("ID").appendChild(add1);
+					add1.setAttribute("id", "Task " + document.getElementById("ID").childElementCount);
+					var add2=document.createElement("span");					
+					vnum++;
+					document.getElementById("ID").appendChild(add2);
+					add2.setAttribute("id", "str"+document.getElementById("ID").childElementCount);
+					if(j==document.getElementById('var').value-1){
+						document.getElementById(add2.id).innerHTML="x"+vnum;
+
+					}else{
+						document.getElementById(add2.id).innerHTML="x"+vnum+"+";
+					}
+				}
+				var symbol=document.createElement("select");
+				symbol.setAttribute("id","sym"+i);
+				document.getElementById("ID").appendChild(symbol);
+				var option1 = document.createElement("option");
+				option1.text = "=";
+				symbol.add(option1);
+				var option2 = document.createElement("option");
+				option2.text = "<=";
+				symbol.add(option2);
+				var option3 = document.createElement("option");
+				option3.text = ">=";
+				symbol.add(option3);
+				var add3=document.createElement("input");
+				add3.setAttribute("id","b"+i);
+				document.getElementById("ID").appendChild(add3);
+				vnum=0;
+				var br=document.createElement("br");
+				document.getElementById("ID").append(br);
+			}
+			table[i]=[];
+			document.getElementById('constraint').style="inline";
+		}
+		function simplex(m){
+			var i=0;
+			var j=0;
+			var sim=true;
+			while(sim){
+				var neg=false;			
+				var minimum=0;
+				var c=-1;
+				var r=-1;
+				for(i=0;i<m[0].length;i++){<!--col of pivot-->
+					if(m[m.length-1][i]<0){
+						if(m[m.length-1][i]<minimum){
+							minimum=m[m.length-1][i];
+							c=i;
+						}
+						neg=true;
+					}
+				}
+				if(!neg){
+					break;
+				}	
+				minimum=-1;
+				for(i=0;i<m.length-1;i++){<!--row of pivot-->
+					if(minimum==-1){
+						minimum=m[i][m[0].length-1]/m[i][c];				
+						r=i;
+					}else{
+						if(m[i][m[0].length-1]/m[i][c]<minimum&&m[i][m[0].length-1]/m[i][c]>0||minimum<0){
+							minimum=m[i][m[0].length-1]/m[i][c];
+							r=i;
+						}
+					}						
+				}
+				for(i=0;i<m.length;i++){
+					if(i==r){
+						for(j=0;j<m[0].length;j++){
+							if(j!=c){
+								m[i][j]/=m[i][c];
+							}
+						}
+						m[i][c]/=m[i][c];
+					}else{
+						var coeff=m[i][c]/m[r][c]*-1;
+						for(j=0;j<m[0].length;j++){
+							m[i][j]=parseFloat(m[i][j])+parseFloat(coeff*m[r][j]);
+						}
+					}
+				}			
+			}
+		}
+		function findDual(){
+			
+		}
+		function createMatrix(x,y){
+				var c1,c2=0;
+				var elem=0;
+				var e=document.getElementById('eq').children;
+				var c=document.getElementById('ID').children;
+				for(c1=0;c1<x;c1++){<!--cons-->
+					for(c2=0;c2<y;c2++){<!--var-->
+						table[c1].push(c[elem].value);
+						elem+=2;
+					}
+					elem++;
+					table[c1].push(c[elem].value);
+					elem+=2;
+				}
+				elem=2;
+				for(c2=1;c2<=y;c2++){<!--objective row-->
+					table[x].push(e[elem].value*-1);
+					elem+=2	
+				}
+				table[x].push(0);			
+				var printTable="";
+				if(document.getElementById("method").value=="findDual"){<!--print dual prob-->
+					if(document.getElementById("probtype").value=="maximize"){
+						printTable+="Minimize z=";
+					}else{
+						printTable+="Maximize z=";
+					}
+					for(c2=0;c2<x;c2++){
+						printTable+=table[c2][y]+"w"+parseInt(c2+1);
+						if(c2!=x-1){
+							printTable+="+ ";
+						}
+					}
+					printTable+="<br>";
+					for(c1=0;c1<y;c1++){
+						for(c2=0;c2<=x;c2++){
+							if(c2==x){
+								if(document.getElementById("probtype").value=="maximize"){
+									printTable+=">=";
+								}
+								else{
+									printTable+="<=";
+								}					
+								printTable+=parseFloat(table[c2][c1])*-1;
+							}
+							else{
+								if((document.getElementById("probtype").value=="maximize"&&document.getElementById("sym"+c2).value==">=")||(document.getElementById("probtype").value=="minimize"&&document.getElementById("sym"+c2).value=="<=")){
+									printTable+=parseFloat(table[c2][c1])*-1+"w"+parseInt(c2+1);
+								}
+								else{
+									printTable+=parseFloat(table[c2][c1])+"w"+parseInt(c2+1);
+								}
+								if(c2!=x-1){
+									printTable+="+ ";
+								}
+							}
+						}				
+						printTable+="<br>";
+					}
+					document.getElementById("output").innerHTML=printTable;
+					return;
+				}
+				<!--insert slack vars here-->
+				elem=y;				
+				var numslack=0;
+				for(c1=0;c1<x;c1++){
+					if(document.getElementById("sym"+c1).value=="<="){
+						for(c2=0;c2<y;c2++){
+							if(c2==c1){
+								table[c2].splice(elem,0,1);
+							}
+							else{
+								table[c2].splice(elem,0,0);
+							}
+						}
+						table[x].splice(elem,0,0);
+						elem++;
+						numslack++;
+					}
+				}				
+				if(document.getElementById("method").value=="simplex"){
+					simplex(table);
+				}
+				for(c1=0;c1<=x;c1++){
+					for(c2=0;c2<=parseInt(y)+parseInt(numslack);c2++){
+						printTable+=table[c1][c2]+" ";
+					}
+					printTable+="<br>";
+				}
+				document.getElementById("output").innerHTML=printTable;
+		}
+	</script>
+</head>
+
+<body>
+	<h1>Linear Programming Calculator</h1>
+	Please type in your equation.
+	<br>
+	Number of variables <input id="var" type="number">
+	Number of constraints <input id="cons" type="number">
+	<button onclick=generate()>Create</button>
+	<div id="eq"></div>
+	<p id="constraint" style="display:none">Subject to:</p>
+	<div id="ID"></div>
+	<br>
+	What would you like to do?
+	<select id="method">
+		<option value="simplex">Simplex Method</option>
+		<option>Two Phase Method</option>
+		<option value="dualSimplex">Dual Simplex Method</option>
+		<option value="findDual">Find Dual Problem</option>
+		<option>Integer Programming</option>
+		<option>Branch and Bound</option>
+	</select>
+	<button onclick=createMatrix(document.getElementById('cons').value,document.getElementById('var').value)>Solve</button>
+	<div id="output"></div>
+</body>
+
+</html>
